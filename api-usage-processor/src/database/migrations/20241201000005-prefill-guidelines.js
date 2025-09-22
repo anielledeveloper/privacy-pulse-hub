@@ -1,0 +1,61 @@
+'use strict';
+
+const GUIDELINES = [
+  { 
+    id: 'g-001', 
+    text: 'We write E2E tests for critical flows.', 
+    metadata: { category: 'quality', version: 1 } 
+  },
+  { 
+    id: 'g-002', 
+    text: 'We perform code reviews within one business day.', 
+    metadata: { category: 'collaboration', version: 1 } 
+  },
+  { 
+    id: 'g-003', 
+    text: 'We keep PRs small and focused.', 
+    metadata: { category: 'process', version: 1 } 
+  },
+  { 
+    id: 'g-004', 
+    text: 'We document architectural decisions (ADRs).', 
+    metadata: { category: 'documentation', version: 1 } 
+  },
+  { 
+    id: 'g-005', 
+    text: 'We monitor and alert for critical paths.', 
+    metadata: { category: 'reliability', version: 1 } 
+  },
+  { 
+    id: 'g-006', 
+    text: 'We maintain accessibility in UI changes.', 
+    metadata: { category: 'accessibility', version: 1 } 
+  },
+  { 
+    id: 'g-007', 
+    text: 'We write clear commit messages with conventional format.', 
+    metadata: { category: 'process', version: 1 } 
+  },
+  { 
+    id: 'g-008', 
+    text: 'We pair program on complex features.', 
+    metadata: { category: 'collaboration', version: 1 } 
+  }
+];
+
+module.exports = {
+  up: async (queryInterface, Sequelize) => {
+    const rows = GUIDELINES.map(g => ({
+      id: g.id,
+      text: g.text,
+      metadata: JSON.stringify(g.metadata),
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }));
+    await queryInterface.bulkInsert('guidelines', rows, {});
+  },
+  
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkDelete('guidelines', { id: GUIDELINES.map(g => g.id) }, {});
+  }
+};

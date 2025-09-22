@@ -1,0 +1,55 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: usage-postgres-dev
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: usage_db
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata_dev:/var/lib/postgresql/data
+      - ./postgres-init-dev:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d usage_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    command: >
+      postgres
+      -c max_connections=50
+      -c shared_buffers=128MB
+      -c effective_cache_size=512MB
+      -c log_statement=all
+      -c log_min_duration_statement=0
+
+  api:
+    image: node:20-alpine
+    container_name: usage-api-dev
+    working_dir: /usr/src/app
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file:
+      - ./api-usage-processor/.env
+    environment:
+      NODE_ENV: development
+      DEBUG: "*"
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./api-usage-processor:/usr/src/app
+    command: >
+      sh -c "
+        apk add --no-cache postgresql-client &&
+        corepack enable &&
+        corepack prepare pnpm@latest --activate &&
+        chmod +x ./docker/entrypoint.sh &&
+        ./docker/entrypoint.sh
+      "
+
+volumes:
+  pgdata_dev:

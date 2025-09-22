@@ -1,0 +1,17 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="64" cy="64" r="60" fill="#4CAF50" stroke="#2E7D32" stroke-width="4"/>
+  
+  <!-- Pulse/heartbeat lines -->
+  <path d="M30 64 L45 64 L50 50 L55 78 L60 64 L75 64" 
+        stroke="white" stroke-width="6" stroke-linecap="round" fill="none"/>
+  
+  <!-- Checkmark -->
+  <path d="M45 80 L55 90 L75 70" 
+        stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  
+  <!-- Team indicator dots -->
+  <circle cx="45" cy="45" r="4" fill="white"/>
+  <circle cx="64" cy="40" r="4" fill="white"/>
+  <circle cx="83" cy="45" r="4" fill="white"/>
+</svg>
