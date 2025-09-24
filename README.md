@@ -8,6 +8,13 @@
 
 PrivacyPulse Hub 🔒 A privacy-first, anonymous Chrome extension for customizable pulse surveys & team collaboration. Works standalone (zero infrastructure) or with API backend. Privacy-focused, consent-driven, local storage by default. Perfect for happiness surveys, coding practices, research data collection.
 
+![Screen](user-interface/screenshots/1.png)
+![Screen](user-interface/screenshots/2.png)
+![Screen](user-interface/screenshots/3.png)
+![Screen](user-interface/screenshots/4.png)
+![Screen](user-interface/screenshots/5.png)
+![Screen](user-interface/screenshots/6.png)
+
 📖 **[View Product Documentation & Features →](./PRODUCT.md)** | 📚 **[User Guide & Instructions →](./USER_GUIDE.md)**
 
 ## Quick Start
